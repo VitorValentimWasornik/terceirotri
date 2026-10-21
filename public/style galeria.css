@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo: #1a0a00;
+    --card: rgba(40, 15, 5, 0.92);
+    --dourado: #ffd700;
+    --laranja: #ff8c00;
+    --vermelho: #e6392b;
+    --verde: #2ecc71;
+    --azul: #1e90ff;
+    --branco: #fff8e7;
+    --cinza: #d4c4a8;
+}
+
+body {
+    min-height: 100vh;
+    background: 
+        linear-gradient(rgba(20, 8, 0, 0.75), rgba(10, 4, 0, 0.85)),
+        url('imagens/discografia.jpg') center / cover no-repeat fixed;
+    color: var(--branco);
+    font-family: "Roboto", sans-serif;
+}
+
+footer {
+    padding: 18px 20px;
+    background: rgba(25, 10, 0, 0.95);
+    border-top: 3px solid var(--dourado);
+    color: var(--cinza);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 18px 20px;
+    background: rgba(25, 10, 0, 0.95);
+    border-bottom: 3px solid var(--dourado);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+    text-align: center;
+}
+
+.link {
+    display: inline-block;
+    color: var(--branco);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    margin: 0 4px;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+}
+
+.link:hover {
+    color: var(--dourado);
+    text-shadow: 0 0 12px var(--dourado);
+}
+
+.vitrine {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 50px 25px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.vitrine article {
+    min-width: 0;
+    padding: 18px;
+    background: var(--card);
+    border: 2px solid var(--laranja);
+    border-radius: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.15);
+}
+
+.vitrine article:hover {
+    transform: translateY(-8px);
+    border-color: var(--dourado);
+    box-shadow: 0 0 28px rgba(255, 215, 0, 0.4);
+}
+
+.imagem {
+    display: block;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: hid 9px;
+    border: 2px solid #8b5a2b;
+    transition: 0.3s;
+}
+
+.vitrine article:hover .imagem {
+    border-color: var(--dourado);
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+}
+
+.vitrine h2 {
+    color: var(--dourado);
+    font-family: "Bangers", cursive;
+    font-size: 1.9rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.vitrine p {
+    min-height: 45px;
+    color: var(--cinza);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.personagem-um:hover {
+    border-color: #ffd700;
+    box-shadow: 0 0 28px rgba(255, 215, 0, 0.45);
+}
+
+.personagem-dois:hover {
+    border-color: #ff8c00;
+    box-shadow: 0 0 28px rgba(255, 140, 0, 0.45);
+}
+
+.personagem-quatro:hover {
+    border-color: #e6392b;
+    box-shadow: 0 0 28px rgba(230, 57, 43, 0.45);
+}
+
+.personagem-cinco:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 0 28px rgba(46, 204, 113, 0.4);
+}
+
+.personagem-seis:hover {
+    border-color: #1e90ff;
+    box-shadow: 0 0 28px rgba(30, 144, 255, 0.4);
+}
+
+.personagem-sete:hover {
+    border-color: #ff6b00;
+    box-shadow: 0 0 28px rgba(255, 107, 0, 0.45);
+}
+
+.personagem-oito:hover {
+    border-color: #ff00aa;
+    box-shadow: 0 0 28px rgba(255, 0, 170, 0.4);
+}
+
+@media (max-width: 1000px) {
+    .vitrine {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .menu {
+        padding: 15px 10px;
+    }
+
+    .link {
+        font-size: 0.85rem;
+        padding: 7px 8px;
+    }
+
+    .vitrine {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+    }
+
+    .imagem {
+        height: 250px;
+    }
+}

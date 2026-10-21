@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;500;700&family=Caveat:wght@400;500;600;700&display=swap');
+
+:root {
+    --fundo-topo: #4a4440;
+    --fundo-base: #2e2a27;
+    --fundo-escuro: #1a0a00;
+    --card: rgba(40, 15, 5, 0.92);
+    --dourado: #ffd700;
+    --laranja: #ff8c00;
+    --vermelho: #e6392b;
+    --branco: #fff8e7;
+    --cinza: #d4c4a8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--fundo-topo), var(--fundo-base));
+    background-attachment: fixed;
+    color: var(--branco);
+    font-family: 'Roboto', sans-serif;
+}
+
+footer {
+    padding: 18px 20px;
+    background: rgba(25, 10, 0, 0.95);
+    border-top: 3px solid var(--dourado);
+    color: var(--cinza);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* MENU */
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 18px 20px;
+    background: var(--fundo-escuro);
+    border-bottom: 3px solid var(--dourado);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
+
+.link {
+    position: relative;
+    margin: 0 4px;
+    padding: 8px 16px;
+    color: var(--branco);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: var(--dourado);
+    text-shadow: 0 0 12px var(--dourado);
+}
+
+/* CONTAINER DO CHAT */
+.chatContainer {
+    position: relative;
+    width: min(700px, 92%);
+    height: 75vh;
+    margin: 45px auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 3px solid var(--laranja);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 0 15px rgba(255, 140, 0, 0.35),
+        0 0 40px rgba(255, 215, 0, 0.2),
+        0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.chatContainer::before {
+    content: "♪ A Banda Do Zé Pretinho ♪";
+    display: block;
+    padding: 9px;
+    text-align: center;
+    background: var(--fundo-escuro);
+    color: var(--dourado);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+    border-bottom: 2px solid var(--dourado);
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+#boasVindas {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 140, 0, 0.18),
+        transparent
+    );
+    color: var(--dourado);
+    font-family: 'Bangers', cursive;
+    font-size: 2.3rem;
+    letter-spacing: 3px;
+    text-shadow:
+        0 0 10px rgba(255, 215, 0, 0.6),
+        0 0 25px rgba(255, 140, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 140, 0, 0.4);
+}
+
+/* ÁREA DAS MENSAGENS */
+#caixaChat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 140, 0, 0.06),
+        transparent 65%
+    );
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--laranja) var(--fundo-escuro);
+}
+
+#caixaChat::-webkit-scrollbar {
+    width: 8px;
+}
+
+#caixaChat::-webkit-scrollbar-track {
+    background: var(--fundo-escuro);
+}
+
+#caixaChat::-webkit-scrollbar-thumb {
+    background: var(--laranja);
+    border-radius: 10px;
+}
+
+/* MENSAGENS (Jorge Ben Jor / Sistema: esquerda) */
+.msg {
+    align-self: flex-start;
+    width: fit-content;
+    max-width: 80%;
+    margin: 10px 0;
+    padding: 14px 18px;
+    border: 1px solid var(--laranja);
+    border-left: 5px solid var(--dourado);
+    border-radius: 4px 14px 14px 4px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 140, 0, 0.15),
+        rgba(26, 10, 0, 0.9)
+    );
+    color: var(--branco);
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    box-shadow: 0 0 12px rgba(255, 140, 0, 0.15);
+    animation: aparecer 0.25s ease;
+}
+
+/* MENSAGENS DO USUÁRIO (direita) */
+.msg.usuario {
+    align-self: flex-end;
+    border-left: 1px solid var(--dourado);
+    border-right: 5px solid var(--vermelho);
+    border-radius: 14px 4px 4px 14px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 215, 0, 0.14),
+        rgba(40, 15, 5, 0.95)
+    );
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ENTRADA DE TEXTO */
+#inputArea {
+    display: flex;
+    padding: 18px;
+    gap: 12px;
+    background: var(--fundo-escuro);
+    border-top: 2px solid var(--dourado);
+}
+
+#mensagem {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 2px solid #8b5a2b;
+    border-radius: 8px;
+    outline: none;
+    background: #0f0500;
+    color: var(--branco);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    transition: 0.25s;
+}
+
+#mensagem::placeholder {
+    color: #9a8466;
+}
+
+#mensagem:focus {
+    border-color: var(--dourado);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.45);
+}
+
+/* BOTÃO ENVIAR */
+#btnEnviar {
+    min-width: 130px;
+    padding: 12px 20px;
+    border: 2px solid var(--laranja);
+    border-radius: 8px;
+    background: var(--dourado);
+    color: #2a1000;
+    font-family: 'Bangers', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+    transition: 0.25s ease;
+}
+
+#btnEnviar:hover {
+    background: var(--laranja);
+    border-color: var(--dourado);
+    box-shadow: 0 0 28px var(--laranja);
+    transform: translateY(-3px);
+}
+
+#btnEnviar:active {
+    transform: scale(0.96);
+}
+
+#btnEnviar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* RODAPÉ */
+footer {
+    text-align: center;
+    padding: 25px;
+    font-size: 1rem;
+    color: var(--cinza);
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+    .menu {
+        padding: 12px 5px;
+    }
+
+    .link {
+        font-size: 0.85rem;
+        padding: 7px 8px;
+    }
+
+    .chatContainer {
+        width: 94%;
+        height: 78vh;
+        margin: 25px auto;
+        border-radius: 14px;
+    }
+
+    #boasVindas {
+        font-size: 1.7rem;
+        padding: 15px;
+    }
+
+    #caixaChat {
+        padding: 15px;
+    }
+
+    .msg {
+        max-width: 88%;
+        font-size: 1.3rem;
+    }
+
+    #inputArea {
+        padding: 12px;
+    }
+
+    #btnEnviar {
+        min-width: 90px;
+        font-size: 1.1rem;
+    }
+}

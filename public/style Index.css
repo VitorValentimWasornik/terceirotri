@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo-topo: #4a4440;
+    --fundo-base: #2e2a27;
+    --card: rgba(40, 15, 5, 0.92);
+    --dourado: #ffd700;
+    --laranja: #ff8c00;
+    --branco: #fff8e7;
+    --cinza: #d4c4a8;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--fundo-topo), var(--fundo-base));
+    background-attachment: fixed;
+    color: var(--branco);
+    font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+}
+
+footer {
+    padding: 18px 20px;
+    background: rgba(25, 10, 0, 0.95);
+    border-top: 3px solid var(--dourado);
+    color: var(--cinza);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* MENU */
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 18px 20px;
+    background: #1a0a00;
+    border-bottom: 3px solid var(--dourado);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+    text-align: center;
+}
+
+.link {
+    display: inline-block;
+    color: var(--branco);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    margin: 0 4px;
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: var(--dourado);
+    text-shadow: 0 0 12px var(--dourado);
+}
+
+/* LAYOUT PRINCIPAL */
+.personagem {
+    min-height: calc(100vh - 75px);
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.esquerdo {
+    flex: 1;
+    max-width: 560px;
+}
+
+.titulo {
+    font-family: "Bangers", cursive;
+    font-size: 4.5rem;
+    letter-spacing: 3px;
+    line-height: 1;
+    color: var(--dourado);
+    text-shadow:
+        0 0 10px rgba(255, 215, 0, 0.6),
+        0 0 25px rgba(255, 140, 0, 0.4);
+    margin-bottom: 18px;
+}
+
+.subtitulo {
+    color: var(--cinza);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* BALÃO COM LEGENDA */
+.balao {
+    padding: 22px;
+    margin-bottom: 25px;
+    background: var(--card);
+    border: 2px solid var(--laranja);
+    border-left: 6px solid var(--dourado);
+    border-radius: 15px;
+    color: var(--branco);
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: 0 0 18px rgba(255, 140, 0, 0.2);
+}
+
+.balao::before {
+    content: "♪ JORGE BEN JOR ♪";
+    display: block;
+    margin-bottom: 12px;
+    color: var(--dourado);
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* BOTÃO */
+.botao {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--dourado);
+    color: #2a1000;
+    border: 2px solid var(--laranja);
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: "Bangers", cursive;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background: var(--laranja);
+    border-color: var(--dourado);
+    box-shadow: 0 0 28px var(--laranja);
+    transform: translateY(-3px);
+}
+
+/* FOTO NA MOLDURA */
+.direito {
+    flex-shrink: 0;
+}
+
+.moldura {
+    width: 520px;
+    height: 520px;
+    padding: 6px;
+    background: #1a0a00;
+    border: 3px solid var(--dourado);
+    border-radius: 16px;
+    box-shadow:
+        0 0 30px rgba(255, 215, 0, 0.35),
+        0 15px 30px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+}
+
+.moldura:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 0 40px rgba(255, 140, 0, 0.55),
+        0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.moldura img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 1100px) {
+    .moldura {
+        width: 420px;
+        height: 420px;
+    }
+}
+
+@media (max-width: 900px) {
+    .personagem {
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        gap: 35px;
+        padding: 40px 25px;
+    }
+
+    .esquerdo {
+        max-width: 100%;
+    }
+
+    .titulo {
+        font-size: 3.5rem;
+    }
+
+    .moldura {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+@media (max-width: 500px) {
+    .link {
+        font-size: 0.85rem;
+        padding: 7px 8px;
+    }
+
+    .titulo {
+        font-size: 2.8rem;
+    }
+
+    .subtitulo {
+        font-size: 1rem;
+    }
+}

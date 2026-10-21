@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | Jorge Ben Jor</title>
+    <link rel="stylesheet" href="style chat.css">
+</head>
+
+<body>
+
+    <nav class="menu">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="galeria.html">Galeria</a>
+        <a class="link" href="chat.html">Chat</a>
+        <a class="link" href="cadastro.html">Cadastro</a>
+        <a class="link" href="login.html">Login</a>
+    </nav>
+
+    <div class="chatContainer">
+
+        <h2 id="boasVindas">Bem-vindo à Banda Do Zé Pretinho</h2>
+
+        <div id="caixaChat"></div>
+
+        <div id="inputArea">
+            <input type="text" id="mensagem" placeholder="Mande um salve pro Jorge...">
+            <button id="btnEnviar">Enviar</button>
+        </div>
+
+    </div>
+    
+    <footer>
+        MPB © 2026 | Desenvolvido por Vitor Valentim
+    </footer>
+
+    <script>
+        const usuarioLogado = 'Vitor';
+
+        document.querySelector('#boasVindas').textContent =
+            `Fala, ${usuarioLogado}! Aqui é o Jorge Ben Jor!`;
+
+        const caixaChat = document.querySelector('#caixaChat');
+        const inputMensagem = document.querySelector('#mensagem');
+        const btnEnviar = document.querySelector('#btnEnviar');
+
+        const historicoConversa = [];
+
+        function mensagemTela(autor, texto) {
+            const textoFinal = document.createElement('p');
+
+            textoFinal.className = 'msg';
+
+            if (autor === usuarioLogado) {
+                textoFinal.classList.add('usuario');
+            }
+
+            textoFinal.textContent = `${autor}: ${texto}`;
+
+            caixaChat.appendChild(textoFinal);
+
+            caixaChat.scrollTop = caixaChat.scrollHeight;
+        }
+
+        btnEnviar.addEventListener('click', async () => {
+
+            const textoMensagem = inputMensagem.value.trim();
+
+            if (!textoMensagem) return;
+
+            mensagemTela(usuarioLogado, textoMensagem);
+
+            historicoConversa.push({
+                role: "user",
+                content: textoMensagem
+            });
+
+            inputMensagem.value = '';
+
+            btnEnviar.disabled = true;
+
+            try {
+
+                const respostaServidor = await fetch('/chat', {
+                    method: 'POST',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify({
+                        historico: historicoConversa
+                    })
+                });
+
+                const dados = await respostaServidor.json();
+
+                if (!respostaServidor.ok) {
+
+                    mensagemTela('Jorge Ben Jor', dados.erro);
+
+                    return;
+                }
+
+                mensagemTela('Jorge Ben Jor', dados.resposta);
+
+            } catch (erro) {
+
+                mensagemTela(
+                    'Sistema',
+                    'Não foi possível conectar com o Jorge Ben Jor.'
+                );
+
+            } finally {
+
+                btnEnviar.disabled = false;
+            }
+        });
+
+        inputMensagem.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') btnEnviar.click();
+        });
+    </script>
+
+</body>
+</html>

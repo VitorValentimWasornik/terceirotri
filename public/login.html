@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Jorge Ben Jor</title>
+    <link rel="stylesheet" href="style login.css">
+</head>
+
+<body>
+
+    <nav class="menu">
+        <div class="links">
+            <a href="index.html" class="link">Home</a>
+            <a href="galeria.html" class="link">Galeria</a>
+            <a href="chat.html" class="link">Chat</a>
+            <a href="cadastro.html" class="link">Cadastro</a>
+            <a href="login.html" class="link">Login</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <div class="titulo-area">
+            <span class="status">● No ar</span>
+            <h1>Login</h1>
+            <p>Entre na roda e converse com o Jorge Ben </p>
+        </div>
+
+        <div class="container">
+
+            <div class="disco" id="disco">
+                <div class="disco-meio"></div>
+            </div>
+
+            <h2>Entrar</h2>
+
+            <div class="linha"></div>
+
+            <div class="campo-grupo">
+                <label for="loginEmail">E-mail</label>
+                <input type="email" id="loginEmail" placeholder="Digite seu e-mail">
+            </div>
+
+            <div class="campo-grupo">
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" placeholder="Digite sua senha">
+            </div>
+
+            <button id="btnLogin">Entrar</button>
+
+            <div id="loginMensagem" class="mensagem"></div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        MPB © 2026 | Desenvolvido por Vitor Valentim
+    </footer>
+
+    <script>
+        const btnLogin = document.querySelector('#btnLogin');
+        const loginMensagem = document.querySelector('#loginMensagem');
+        const disco = document.querySelector('#disco');
+
+        btnLogin.addEventListener('click', async () => {
+            const emailEntrada = document.querySelector('#loginEmail');
+            const senhaEntrada = document.querySelector('#loginSenha');
+
+            const emailDigitado = emailEntrada.value.trim();
+            const senhaDigitada = senhaEntrada.value;
+
+            if (!emailDigitado || !senhaDigitada) {
+                loginMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+                loginMensagem.style.color = '#e6392b';
+                return;
+            }
+
+            loginMensagem.innerText = 'Aguarde, entrando...';
+            loginMensagem.style.color = '#ffd700';
+            disco.classList.add('girando');
+
+            try {
+                const respostaBe = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+                disco.classList.remove('girando');
+
+                if (!respostaBe.ok) {
+                    loginMensagem.innerText = `${dados.erro}`;
+                    loginMensagem.style.color = '#e6392b';
+                    return;
+                }
+
+                loginMensagem.innerText = `${dados.mensagem}: ${dados.usuario} entrando no chat...`;
+                loginMensagem.style.color = '#2ecc71';
+
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                disco.classList.remove('girando');
+                loginMensagem.innerText = 'Erro ao conectar com o servidor!';
+                loginMensagem.style.color = '#e6392b';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
