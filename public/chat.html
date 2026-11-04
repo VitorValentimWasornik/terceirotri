@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,14 +30,23 @@
         </div>
 
     </div>
-    
+
     <footer>
         MPB © 2026 | Desenvolvido por Vitor Valentim
     </footer>
 
     <script>
-        const usuarioLogado = 'Vitor';
 
+        // VERIFICA SE O USUÁRIO ESTÁ LOGADO
+        const usuarioLogado = localStorage.getItem('usuarioChat');
+
+        if (!usuarioLogado || usuarioLogado.trim() === '') {
+            alert('Você precisa fazer login primeiro!');
+            window.location.replace('login.html');
+            throw new Error('Usuário não logado');
+        }
+
+        // MOSTRA O NOME DO USUÁRIO
         document.querySelector('#boasVindas').textContent =
             `Fala, ${usuarioLogado}! Aqui é o Jorge Ben Jor!`;
 
@@ -104,6 +114,11 @@
 
                 mensagemTela('Jorge Ben Jor', dados.resposta);
 
+                historicoConversa.push({
+                    role: "assistant",
+                    content: dados.resposta
+                });
+
             } catch (erro) {
 
                 mensagemTela(
@@ -114,12 +129,16 @@
             } finally {
 
                 btnEnviar.disabled = false;
+
             }
         });
 
         inputMensagem.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') btnEnviar.click();
+            if (e.key === 'Enter') {
+                btnEnviar.click();
+            }
         });
+
     </script>
 
 </body>
