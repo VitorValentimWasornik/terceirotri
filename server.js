@@ -70,7 +70,7 @@ app.post('/login', (req, res)=>{
 
     return res.json({
         mensagem: "Login realizado com Sucesso!!",
-        usuario: emailExiste.email
+        usuario: emailExiste.usuario
     });
 })
 
